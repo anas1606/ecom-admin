@@ -46,6 +46,7 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseModel login(@RequestBody LoginModel loginModel) {
         ResponseModel responseModel;
+
         try {
             //Load the userdetail of the user where emailID = "Example@gmail.com"
             final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmailId(), "ADMIN");
