@@ -47,8 +47,6 @@ public class AdminController {
     public ResponseModel login(@RequestBody LoginModel loginModel) {
         ResponseModel responseModel;
         try {
-            //Authenticate with emailID and Pswd
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmailId(), loginModel.getPassword()));
             //Load the userdetail of the user where emailID = "Example@gmail.com"
             final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmailId(), "ADMIN");
 
