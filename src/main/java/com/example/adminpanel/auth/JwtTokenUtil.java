@@ -60,7 +60,7 @@ public class JwtTokenUtil implements Serializable {
         }
         claims.put("authorities", Stream.of(authority).collect(Collectors.toList()));
         List<String> dataString = new ArrayList<>();
-        dataString.add("USER");
+        dataString.add("ADMIN");
         claims.put("userType", dataString);
         claims.put("role", dataString);
 
