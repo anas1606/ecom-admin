@@ -3,7 +3,6 @@ package com.example.adminpanel.service;
 import com.example.adminpanel.repository.AdminUserRepository;
 import com.example.commanentity.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -25,23 +24,23 @@ public class JwtUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        List<Admin> user = adminUserRepository.findByEmailID(username);
+        List<Admin> user = adminUserRepository.findByEmailid(username);
         grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("AdminUser not found with username: " + username);
         }
-        return new User(user.get(0).getEmailID(), user.get(0).getPassword(),
+        return new User(user.get(0).getEmailid(), user.get(0).getPassword(),
                 grantedAuthorities);
     }
 
     public UserDetails loadUserByUsername(String username, String role) {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        List<Admin> user = adminUserRepository.findByEmailID(username);
+        List<Admin> user = adminUserRepository.findByEmailid(username);
         grantedAuthorities.add(new SimpleGrantedAuthority(role));
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("AdminUser not found with username: " + username);
         }
-        return new User(user.get(0).getEmailID(), user.get(0).getPassword(),
+        return new User(user.get(0).getEmailid(), user.get(0).getPassword(),
                 grantedAuthorities);
     }
 }

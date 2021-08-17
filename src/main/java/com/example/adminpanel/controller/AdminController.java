@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -48,11 +47,11 @@ public class AdminController {
             //Load the userdetail of the user where emailID = "Example@gmail.com"
             final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmailId(), "ADMIN");
 
-            Admin adminuser = adminUserRepository.findByEmailIDAndStatus(userDetails.getUsername(), Status.ACTIVE);
+            Admin adminuser = adminUserRepository.findByEmailid(userDetails.getUsername()).get(0);
             final String token = jwtTokenUtil.generateToken(userDetails);
 
             //set the Bearer token to AdminUser data
-            adminuser.setSessionToken(token);
+            adminuser.setSessiontoken(token);
             //update the adminuser to database with token And ExpirationDate
             adminUserRepository.save(adminuser);
 
