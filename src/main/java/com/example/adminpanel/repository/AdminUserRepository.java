@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AdminUserRepository extends JpaRepository<Admin, String> {
 
-    @Query("SELECT count(a.adminuid) FROM Admin a WHERE a.sessiontoken =:token")
+    @Query("SELECT count(a.id) FROM Admin a WHERE a.session_token =:token")
     int countBySessionTokenAndStatus(String token);
 
     List<Admin> findByEmailid(String emailID);

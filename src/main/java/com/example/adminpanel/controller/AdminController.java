@@ -51,7 +51,7 @@ public class AdminController {
             final String token = jwtTokenUtil.generateToken(userDetails);
 
             //set the Bearer token to AdminUser data
-            adminuser.setSessiontoken(token);
+            adminuser.setSession_token(token);
             //update the adminuser to database with token And ExpirationDate
             adminUserRepository.save(adminuser);
 
