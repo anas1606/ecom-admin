@@ -15,6 +15,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+//https://medium.com/@akhileshanand/spring-boot-api-security-with-jwt-and-role-based-authorization-fea1fd7c9e32
+
 @Component
 public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;
