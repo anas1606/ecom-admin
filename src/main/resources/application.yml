@@ -9,7 +9,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: safa-admin
+    name: admin-panel
   datasource:
     url: jdbc:mysql://localhost:3306/e-com
     username: root

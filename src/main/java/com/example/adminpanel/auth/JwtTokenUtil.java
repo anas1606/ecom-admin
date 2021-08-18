@@ -82,7 +82,7 @@ public class JwtTokenUtil implements Serializable {
         final JwtParser jwtParser = Jwts.parser().setSigningKey(secret);
         final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
         final Claims claims = claimsJws.getBody();
-        System.out.println(claims.toString());
+        System.out.println(claims);
         final Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get("roles").toString().split(","))
                         .map(SimpleGrantedAuthority::new)

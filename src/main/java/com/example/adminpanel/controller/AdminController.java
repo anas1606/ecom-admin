@@ -4,11 +4,9 @@ import com.example.adminpanel.auth.JwtTokenUtil;
 import com.example.adminpanel.model.LoginModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.repository.AdminUserRepository;
-import com.example.adminpanel.service.JwtUserDetailService;
 import com.example.adminpanel.util.CommanUtil;
 import com.example.adminpanel.util.Message;
 import com.example.commanentity.Admin;
-import com.example.commanentity.enums.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -53,8 +49,6 @@ public class AdminController {
 
         try {
             //Load the userdetail of the user where emailID = "Example@gmail.com"
-//            final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmailId(), "anas@gmail.com");
-
             final Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginModel.getEmailId(),
