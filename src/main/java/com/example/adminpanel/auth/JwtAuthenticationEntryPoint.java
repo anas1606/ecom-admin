@@ -22,7 +22,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
                          AuthenticationException authException) throws IOException {
         ResponseModel rs = new ResponseModel();
         rs.setData(null);
-        rs.setMessage("Your session is expired. Please Log in again.");
+        rs.setMessage("Unauthorized Request Please Log in again.");
         rs.setStatus(HttpStatus.UNAUTHORIZED);
         rs.setStatusCode(401);
         hsr1.setContentType("application/json");

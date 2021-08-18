@@ -1,10 +1,11 @@
 package com.example.adminpanel.auth;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-//https://medium.com/@akhileshanand/spring-boot-api-security-with-jwt-and-role-based-authorization-fea1fd7c9e32
 
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -53,20 +51,19 @@ public class JwtTokenUtil implements Serializable {
     }
 
     //generate token for user
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        Collection<? extends GrantedAuthority> authorities1 = userDetails.getAuthorities();
-        String authority = "";
-        for (GrantedAuthority auth : authorities1) {
-            authority = auth.getAuthority();
-        }
-        claims.put("authorities", Stream.of(authority).collect(Collectors.toList()));
-        List<String> dataString = new ArrayList<>();
-        dataString.add("ADMIN");
-        claims.put("userType", dataString);
-        claims.put("role", dataString);
+    public String generateToken(Authentication authentication) {
+        String authorities = authentication.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
-        return doGenerateToken(claims, userDetails.getUsername());
+        return Jwts.builder()
+                .setSubject(authentication.getName())
+                .claim("roles", authorities)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
@@ -79,6 +76,19 @@ public class JwtTokenUtil implements Serializable {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    UsernamePasswordAuthenticationToken getAuthenticationToken(final String token, final Authentication existingAuth, final UserDetails userDetails) {
+        final JwtParser jwtParser = Jwts.parser().setSigningKey(secret);
+        final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+        final Claims claims = claimsJws.getBody();
+        System.out.println(claims.toString());
+        final Collection<? extends GrantedAuthority> authorities =
+                Arrays.stream(claims.get("roles").toString().split(","))
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
     }
 
     //GetCurrent User

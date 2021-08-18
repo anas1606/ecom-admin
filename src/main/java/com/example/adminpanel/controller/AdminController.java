@@ -13,8 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,10 +36,12 @@ public class AdminController {
     private AdminUserRepository adminUserRepository;
 
     @Autowired
-    private JwtUserDetailService userDetailsService;
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("ping")
     public String ping() {
         return "Pinging Admin... Success";
@@ -45,10 +53,18 @@ public class AdminController {
 
         try {
             //Load the userdetail of the user where emailID = "Example@gmail.com"
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmailId(), "ADMIN");
+//            final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmailId(), "anas@gmail.com");
 
-            Admin adminuser = adminUserRepository.findByEmailid(userDetails.getUsername()).get(0);
-            final String token = jwtTokenUtil.generateToken(userDetails);
+            final Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginModel.getEmailId(),
+                            loginModel.getPassword()
+                    )
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            Admin adminuser = adminUserRepository.findByEmailid(loginModel.getEmailId()).get(0);
+            final String token = jwtTokenUtil.generateToken(authentication);
 
             //set the Bearer token to AdminUser data
             adminuser.setSession_token(token);
