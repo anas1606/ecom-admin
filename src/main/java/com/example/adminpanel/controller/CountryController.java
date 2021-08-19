@@ -16,4 +16,14 @@ public class CountryController {
     public ResponseModel addCountry(@PathVariable("name") String name) {
         return countryService.addCountry(name);
     }
+
+    @GetMapping("name/list")
+    public ResponseModel getCountryNameList() {
+        return countryService.countrynamelist();
+    }
+
+    @GetMapping("list")
+    public ResponseModel getCountryList() {
+        return countryService.countrylist();
+    }
 }

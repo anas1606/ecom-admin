@@ -4,4 +4,8 @@ import com.example.adminpanel.model.ResponseModel;
 
 public interface StateService {
     ResponseModel addState(String name);
+
+    ResponseModel statenamelist();
+
+    ResponseModel stateList();
 }

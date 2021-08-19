@@ -4,4 +4,8 @@ import com.example.adminpanel.model.ResponseModel;
 
 public interface CountryService {
     ResponseModel addCountry(String name);
+
+    ResponseModel countrynamelist();
+
+    ResponseModel countrylist();
 }

@@ -1,6 +1,5 @@
 package com.example.adminpanel.service.imp;
 
-import com.example.adminpanel.controller.AdminController;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.repository.CountryRepository;
 import com.example.adminpanel.service.CountryService;
@@ -34,6 +33,28 @@ public class CountryServiceImp implements CountryService {
             return commanUtil.create(Message.COUNTRY_ADDED, c, HttpStatus.OK);
         } else {
             return commanUtil.create(Message.COUNTRY_EXIST, null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseModel countrynamelist() {
+        try {
+            return commanUtil.create(Message.SUCCESS, countryRepository.findAllByStatus(), HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Exception will Country Name Fetch {}", e.getMessage());
+            return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseModel countrylist() {
+        try {
+            return commanUtil.create(Message.SUCCESS
+                    , countryRepository.findByALL()
+                    , HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Exception Will geting Country List {}", e.getMessage());
+            return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
