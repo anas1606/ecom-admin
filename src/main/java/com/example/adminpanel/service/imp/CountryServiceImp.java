@@ -25,10 +25,10 @@ public class CountryServiceImp implements CountryService {
 
     @Override
     public ResponseModel addCountry(String name) {
-        int exist = countryRepository.countByName(name.toUpperCase());
+        int exist = countryRepository.countByName(name);
         if (exist == 0) {
             Country c = new Country();
-            c.setName(name);
+            c.setName(name.toUpperCase());
             countryRepository.save(c);
 
             return commanUtil.create(Message.COUNTRY_ADDED, c, HttpStatus.OK);

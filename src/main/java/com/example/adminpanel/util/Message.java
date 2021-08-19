@@ -8,4 +8,6 @@ public class Message {
     public static final String COUNTRY_ADDED = "New country added";
     public static final String STATE_EXIST = "State already exist";
     public static final String STATE_ADDED = "New state added";
+    public static final String CATEGORY_ADDED = "New category added";
+    public static final String CATEGORY_EXIST = "Category already exist";
 }

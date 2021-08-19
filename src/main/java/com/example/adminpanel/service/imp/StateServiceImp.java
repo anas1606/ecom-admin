@@ -24,7 +24,7 @@ public class StateServiceImp implements StateService {
         int exist = stateRepository.countByName(name.toUpperCase());
         if (exist == 0) {
             State s = new State();
-            s.setName(name);
+            s.setName(name.toUpperCase());
             stateRepository.save(s);
 
             return commanUtil.create(Message.STATE_ADDED, s, HttpStatus.OK);
