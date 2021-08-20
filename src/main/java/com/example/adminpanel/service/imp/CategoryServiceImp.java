@@ -39,16 +39,6 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public ResponseModel listCategoryName() {
-        try {
-            return commanUtil.create(Message.SUCCESS, categoryRepository.findAllByStatus(), HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("Exception will category Name Fetch {}", e.getMessage());
-            return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
     public ResponseModel list() {
         try {
             return commanUtil.create(Message.SUCCESS,

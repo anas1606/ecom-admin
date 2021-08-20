@@ -7,8 +7,6 @@ public interface CategoryService {
 
     ResponseModel addCategory(String name);
 
-    ResponseModel listCategoryName();
-
     ResponseModel list();
 
     ResponseModel update(ActiveInactiveModel model);

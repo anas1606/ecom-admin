@@ -40,18 +40,6 @@ public class HobbyServiceImp implements HobbyService {
     }
 
     @Override
-    public ResponseModel listHobbyNames() {
-        try {
-            List<String> hobbys = hobbyRepository.findAllName();
-            return commanUtil.create(Message.SUCCESS, hobbys
-                    , HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("listing Hobby Names {}", e.getMessage());
-            return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
     public ResponseModel hobbyList() {
         try {
             return commanUtil.create(Message.SUCCESS

@@ -6,8 +6,6 @@ import com.example.adminpanel.model.ResponseModel;
 public interface HobbyService {
     ResponseModel addHobby(String name);
 
-    ResponseModel listHobbyNames();
-
     ResponseModel hobbyList();
 
     ResponseModel update(ActiveInactiveModel model);

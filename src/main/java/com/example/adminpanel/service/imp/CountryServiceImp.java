@@ -38,16 +38,6 @@ public class CountryServiceImp implements CountryService {
     }
 
     @Override
-    public ResponseModel countrynamelist() {
-        try {
-            return commanUtil.create(Message.SUCCESS, countryRepository.findAllByStatus(), HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("Exception will Country Name Fetch {}", e.getMessage());
-            return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
     public ResponseModel countrylist() {
         try {
             return commanUtil.create(Message.SUCCESS

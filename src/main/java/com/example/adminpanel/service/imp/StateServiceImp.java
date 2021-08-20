@@ -38,16 +38,6 @@ public class StateServiceImp implements StateService {
     }
 
     @Override
-    public ResponseModel statenamelist() {
-        try {
-            return commanUtil.create(Message.SUCCESS, stateRepository.findAllByStatus(), HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("Exception will State Name Fetch {}", e.getMessage());
-            return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
     public ResponseModel stateList() {
         try {
             return commanUtil.create(Message.SUCCESS
