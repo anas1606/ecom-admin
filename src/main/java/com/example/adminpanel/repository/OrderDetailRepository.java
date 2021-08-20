@@ -1,6 +1,5 @@
 package com.example.adminpanel.repository;
 
-import com.example.adminpanel.model.customer.CustomerDetailDTO;
 import com.example.adminpanel.model.order.OrderDTO;
 import com.example.adminpanel.model.order.OrderDetailDTO;
 import com.example.commanentity.Order_Detail;

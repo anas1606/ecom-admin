@@ -1,6 +1,5 @@
 package com.example.adminpanel.repository;
 
-import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.model.customer.CustomerDTO;
 import com.example.adminpanel.model.customer.CustomerDetailDTO;
 import com.example.commanentity.Customer;

@@ -1,7 +1,6 @@
 package com.example.adminpanel.repository;
 
-import com.example.adminpanel.model.customer.CustomerDTO;
-import com.example.adminpanel.model.customer.CustomerDetailDTO;
+
 import com.example.adminpanel.model.vendor.VendorDTO;
 import com.example.adminpanel.model.vendor.VendorDetailDTO;
 import com.example.commanentity.Vendor;
@@ -22,7 +21,7 @@ public interface VendorRepository extends JpaRepository<Vendor, String> {
     @Query("SELECT new com.example.adminpanel.model.vendor.VendorDTO(v,ca.country.name,ca.state.name) " +
             "FROM Vendor v " +
             "LEFT JOIN Company_Address ca on v.id = ca.vendor.id " +
-            "WHERE lower(v.first_name) like lower(:search) OR lower(v.last_name) like lower(:search) " +
+            "WHERE lower(v.first_name) like lower(:search) OR lower(v.last_name) like lower(:search) OR lower(v.company_name) like lower(:search)" +
             "OR lower(ca.country.name) like lower(:search) OR lower(ca.state.name) like lower(:search) ")
     Page<VendorDTO> findAllBySearch(String search, Pageable page);
 
