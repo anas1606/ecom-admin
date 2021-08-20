@@ -21,4 +21,9 @@ public class HobbyController {
     public ResponseModel namelist() {
         return hobbyService.listHobbyNames();
     }
+
+    @GetMapping("list")
+    public ResponseModel list() {
+        return hobbyService.hobbyList();
+    }
 }

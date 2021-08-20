@@ -6,4 +6,6 @@ public interface HobbyService {
     ResponseModel addHobby (String name);
 
     ResponseModel listHobbyNames ();
+
+    ResponseModel hobbyList ();
 }

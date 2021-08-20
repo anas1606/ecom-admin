@@ -42,10 +42,23 @@ public class HobbyServiceImp implements HobbyService {
     public ResponseModel listHobbyNames() {
         try {
             List<String> hobbys = hobbyRepository.findAllName();
-            return commanUtil.create(Message.SUCCESS, hobbys, HttpStatus.OK);
+            return commanUtil.create(Message.SUCCESS, hobbys
+                    , HttpStatus.OK);
         } catch (Exception e) {
             logger.error("listing Hobby Names {}", e.getMessage());
             return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseModel hobbyList() {
+        try {
+            return commanUtil.create(Message.SUCCESS
+                    , hobbyRepository.findByALL()
+                    , HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Exception Will getting Hobby List {}", e.getMessage());
+            return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

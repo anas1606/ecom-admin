@@ -16,4 +16,9 @@ public class CategoryController {
     public ResponseModel addCategory(@PathVariable("name") String name) {
         return categoryService.addCategory(name);
     }
+
+    @GetMapping("name/list")
+    public ResponseModel getNameList() {
+        return categoryService.listCategoryName();
+    }
 }
