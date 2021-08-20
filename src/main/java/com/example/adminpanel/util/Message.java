@@ -16,4 +16,5 @@ public class Message {
     public static final String SUCCESS = "Success";
     public static final String CUSTOMER_NOT_XIST = "Customer not exist";
     public static final String HOBBY_EXIST = "Customer already exist";
+    public static final String VENDOR_NOT_XIST = "Customer not exist";
 }
