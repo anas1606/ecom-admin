@@ -37,12 +37,6 @@ public class AdminController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("ping")
-    public String ping() {
-        return "Pinging Admin... Success";
-    }
-
     @PostMapping("/login")
     public ResponseModel login(@RequestBody LoginModel loginModel) {
         ResponseModel responseModel;
