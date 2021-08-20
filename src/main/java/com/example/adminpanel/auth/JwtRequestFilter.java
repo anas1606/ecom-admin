@@ -58,7 +58,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
             //Firstly check If user Loging at another system then this token is Expired
-            if (adminUserRepository.countBySessionTokenAndStatus(jwtToken) == 0)
+            if (adminUserRepository.countBySession_Token(jwtToken) == 0)
                 log.info("JWT Token has expired Bcoz Login At Another System Or you are Deactivated");
             else {
                 // if token is valid configure Spring Security to manually set
