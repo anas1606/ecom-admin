@@ -1,5 +1,6 @@
 package com.example.adminpanel.controller;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,15 @@ public class CountryController {
     @GetMapping("list")
     public ResponseModel getCountryList() {
         return countryService.countrylist();
+    }
+
+    @PutMapping("update/status")
+    public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
+        return countryService.updateStatus(model);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseModel delete(@PathVariable("id") String id) {
+        return countryService.delete(id);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.adminpanel.repository;
 
-import com.example.adminpanel.model.country.CountryDTO;
 import com.example.adminpanel.model.state.StateDTO;
 import com.example.commanentity.State;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +17,6 @@ public interface StateRepository extends JpaRepository<State, String> {
 
     @Query("SELECT new com.example.adminpanel.model.state.StateDTO(s) FROM State s")
     List<StateDTO> findByALL();
+
+    int countById(String id);
 }

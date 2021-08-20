@@ -17,4 +17,6 @@ public interface CountryRepository extends JpaRepository<Country, String> {
 
     @Query("SELECT new com.example.adminpanel.model.country.CountryDTO(c) FROM Country c")
     List<CountryDTO> findByALL();
+
+    int countById(String id);
 }

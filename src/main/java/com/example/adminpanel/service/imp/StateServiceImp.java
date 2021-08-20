@@ -1,5 +1,6 @@
 package com.example.adminpanel.service.imp;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.repository.StateRepository;
 import com.example.adminpanel.service.StateService;
@@ -55,6 +56,34 @@ public class StateServiceImp implements StateService {
         } catch (Exception e) {
             logger.error("Exception Will geting Country List {}", e.getMessage());
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseModel updateStatus(ActiveInactiveModel model) {
+        State state = stateRepository.findById(model.getId()).orElse(null);
+        if (state != null) {
+            state.setStatus(model.getStatus());
+            state.setUpdated_by(commanUtil.getCurrentUserEmail());
+            stateRepository.save(state);
+            logger.info("state Status Updated");
+
+            return commanUtil.create(Message.SUCCESS, state, HttpStatus.OK);
+        } else {
+            return commanUtil.create(Message.STATE_NOT_EXIST, null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseModel delete(String id) {
+        int state = stateRepository.countById(id);
+        if (state != 0) {
+            stateRepository.deleteById(id);
+            logger.info("Country deleted");
+
+            return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
+        } else {
+            return commanUtil.create(Message.COUNTRY_NOT_XIST, null, HttpStatus.BAD_REQUEST);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.adminpanel.service;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 
 public interface StateService {
@@ -8,4 +9,8 @@ public interface StateService {
     ResponseModel statenamelist();
 
     ResponseModel stateList();
+
+    ResponseModel updateStatus(ActiveInactiveModel model);
+
+    ResponseModel delete(String id);
 }

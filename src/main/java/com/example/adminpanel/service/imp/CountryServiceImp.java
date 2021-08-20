@@ -1,5 +1,6 @@
 package com.example.adminpanel.service.imp;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.repository.CountryRepository;
 import com.example.adminpanel.service.CountryService;
@@ -55,6 +56,34 @@ public class CountryServiceImp implements CountryService {
         } catch (Exception e) {
             logger.error("Exception Will geting Country List {}", e.getMessage());
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseModel updateStatus(ActiveInactiveModel model) {
+        Country country = countryRepository.findById(model.getId()).orElse(null);
+        if (country != null) {
+            country.setStatus(model.getStatus());
+            country.setUpdated_by(commanUtil.getCurrentUserEmail());
+            countryRepository.save(country);
+            logger.info("Country Status Updated");
+
+            return commanUtil.create(Message.SUCCESS, country, HttpStatus.OK);
+        } else {
+            return commanUtil.create(Message.COUNTRY_NOT_XIST, null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseModel delete(String id) {
+        int country = countryRepository.countById(id);
+        if (country != 0) {
+            countryRepository.deleteById(id);
+            logger.info("Country deleted");
+
+            return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
+        } else {
+            return commanUtil.create(Message.COUNTRY_NOT_XIST, null, HttpStatus.BAD_REQUEST);
         }
     }
 }
