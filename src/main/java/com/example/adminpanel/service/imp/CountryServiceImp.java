@@ -64,9 +64,10 @@ public class CountryServiceImp implements CountryService {
         Country country = countryRepository.findById(model.getId()).orElse(null);
         if (country != null) {
             country.setStatus(model.getStatus());
+            country.setName(model.getName());
             country.setUpdated_by(commanUtil.getCurrentUserEmail());
             countryRepository.save(country);
-            logger.info("Country Status Updated");
+            logger.info("Country Updated");
 
             return commanUtil.create(Message.SUCCESS, country, HttpStatus.OK);
         } else {
@@ -79,7 +80,7 @@ public class CountryServiceImp implements CountryService {
         int country = countryRepository.countById(id);
         if (country != 0) {
             countryRepository.deleteById(id);
-            logger.info("Country ");
+            logger.info("Country Deleted");
 
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
         } else {

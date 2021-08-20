@@ -68,6 +68,7 @@ public class HobbyServiceImp implements HobbyService {
         Hobby hobby = hobbyRepository.findById(model.getId()).orElse(null);
         if (hobby != null) {
             hobby.setStatus(model.getStatus());
+            hobby.setName(model.getName());
             hobby.setUpdated_by(commanUtil.getCurrentUserEmail());
             hobbyRepository.save(hobby);
 

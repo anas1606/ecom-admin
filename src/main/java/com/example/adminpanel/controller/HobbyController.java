@@ -7,28 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin/hobby/")
+@RequestMapping("/admin/hobby")
 public class HobbyController {
 
     @Autowired
     private HobbyService hobbyService;
 
-    @PostMapping("add/{name}")
+    @PostMapping("/{name}")
     public ResponseModel addHobby(@PathVariable("name") String name) {
         return hobbyService.addHobby(name);
     }
 
-    @GetMapping("name/list")
-    public ResponseModel namelist() {
-        return hobbyService.listHobbyNames();
-    }
-
-    @GetMapping("list")
+    @GetMapping("")
     public ResponseModel list() {
         return hobbyService.hobbyList();
     }
 
-    @PutMapping("update/status")
+    @PutMapping("")
     public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
         return hobbyService.updateStatus(model);
     }
