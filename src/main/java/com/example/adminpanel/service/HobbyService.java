@@ -10,5 +10,5 @@ public interface HobbyService {
 
     ResponseModel hobbyList();
 
-    ResponseModel updateStatus(ActiveInactiveModel model);
+    ResponseModel update(ActiveInactiveModel model);
 }

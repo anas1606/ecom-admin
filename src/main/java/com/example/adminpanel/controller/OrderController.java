@@ -14,17 +14,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("list")
+    @PostMapping("/list")
     public PageResponseModel list(@RequestBody PageDetailModel model) {
         return orderService.list(model);
     }
 
-    @GetMapping("view/{id}")
+    @GetMapping("/{id}")
     public ResponseModel view(@PathVariable("id") String id) {
         return orderService.view(id);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseModel delete(@PathVariable("id") String id) {
         return orderService.delete(id);
     }

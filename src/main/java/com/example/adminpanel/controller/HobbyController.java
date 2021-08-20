@@ -25,6 +25,6 @@ public class HobbyController {
 
     @PutMapping("")
     public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
-        return hobbyService.updateStatus(model);
+        return hobbyService.update(model);
     }
 }

@@ -61,10 +61,11 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public ResponseModel updateStatus(ActiveInactiveModel model) {
+    public ResponseModel update(ActiveInactiveModel model) {
         Category category = categoryRepository.findById(model.getId()).orElse(null);
         if (category != null) {
             category.setStatus(model.getStatus());
+            category.setName(model.getName().toUpperCase());
             category.setUpdated_by(commanUtil.getCurrentUserEmail());
             categoryRepository.save(category);
 

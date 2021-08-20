@@ -11,5 +11,5 @@ public interface CategoryService {
 
     ResponseModel list();
 
-    ResponseModel updateStatus(ActiveInactiveModel model);
+    ResponseModel update(ActiveInactiveModel model);
 }

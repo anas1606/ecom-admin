@@ -26,7 +26,7 @@ public class CountryController {
 
     @PutMapping("")
     public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
-        return countryService.updateStatus(model);
+        return countryService.update(model);
     }
 
     @DeleteMapping("/{id}")

@@ -13,18 +13,18 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("add/{name}")
+    @PostMapping("/{name}")
     public ResponseModel addCategory(@PathVariable("name") String name) {
         return categoryService.addCategory(name);
     }
 
-    @GetMapping("name/list")
+    @GetMapping("")
     public ResponseModel getNameList() {
-        return categoryService.listCategoryName();
+        return categoryService.list();
     }
 
-    @PutMapping("update/status")
+    @PutMapping("")
     public ResponseModel updateCategory(@RequestBody ActiveInactiveModel model) {
-        return categoryService.updateStatus(model);
+        return categoryService.update(model);
     }
 }

@@ -10,7 +10,7 @@ public interface StateService {
 
     ResponseModel stateList();
 
-    ResponseModel updateStatus(ActiveInactiveModel model);
+    ResponseModel update(ActiveInactiveModel model);
 
     ResponseModel delete(String id);
 }

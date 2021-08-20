@@ -60,10 +60,11 @@ public class StateServiceImp implements StateService {
     }
 
     @Override
-    public ResponseModel updateStatus(ActiveInactiveModel model) {
+    public ResponseModel update(ActiveInactiveModel model) {
         State state = stateRepository.findById(model.getId()).orElse(null);
         if (state != null) {
             state.setStatus(model.getStatus());
+            state.setName(model.getName().toUpperCase());
             state.setUpdated_by(commanUtil.getCurrentUserEmail());
             stateRepository.save(state);
             logger.info("state Status Updated");

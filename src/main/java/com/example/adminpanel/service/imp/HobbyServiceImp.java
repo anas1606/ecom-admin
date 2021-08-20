@@ -64,11 +64,11 @@ public class HobbyServiceImp implements HobbyService {
     }
 
     @Override
-    public ResponseModel updateStatus(ActiveInactiveModel model) {
+    public ResponseModel update(ActiveInactiveModel model) {
         Hobby hobby = hobbyRepository.findById(model.getId()).orElse(null);
         if (hobby != null) {
             hobby.setStatus(model.getStatus());
-            hobby.setName(model.getName());
+            hobby.setName(model.getName().toUpperCase());
             hobby.setUpdated_by(commanUtil.getCurrentUserEmail());
             hobbyRepository.save(hobby);
 

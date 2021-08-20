@@ -9,28 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin/customer/")
+@RequestMapping("/admin/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("list")
+    @PostMapping("/list")
     public PageResponseModel listing(@RequestBody PageDetailModel model) {
         return customerService.coustomerlist(model);
     }
 
-    @PutMapping("update/status")
+    @PutMapping("")
     public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
         return customerService.updateStatus(model);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseModel delete(@PathVariable("id") String id) {
         return customerService.delete(id);
     }
 
-    @GetMapping("view/{id}")
+    @GetMapping("/{id}")
     public ResponseModel viewCustomer(@PathVariable("id") String id) {
         return customerService.viewCustomer(id);
     }

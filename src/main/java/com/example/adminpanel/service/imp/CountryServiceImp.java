@@ -60,11 +60,11 @@ public class CountryServiceImp implements CountryService {
     }
 
     @Override
-    public ResponseModel updateStatus(ActiveInactiveModel model) {
+    public ResponseModel update(ActiveInactiveModel model) {
         Country country = countryRepository.findById(model.getId()).orElse(null);
         if (country != null) {
             country.setStatus(model.getStatus());
-            country.setName(model.getName());
+            country.setName(model.getName().toUpperCase());
             country.setUpdated_by(commanUtil.getCurrentUserEmail());
             countryRepository.save(country);
             logger.info("Country Updated");
