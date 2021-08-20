@@ -4,7 +4,6 @@ import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.PageDetailModel;
 import com.example.adminpanel.model.PageResponseModel;
 import com.example.adminpanel.model.ResponseModel;
-import com.example.adminpanel.model.customer.CustomerDetailDTO;
 import com.example.adminpanel.model.vendor.VendorDTO;
 import com.example.adminpanel.model.vendor.VendorDetailDTO;
 import com.example.adminpanel.repository.VendorRepository;
