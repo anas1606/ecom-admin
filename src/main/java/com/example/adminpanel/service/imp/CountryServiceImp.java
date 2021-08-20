@@ -79,7 +79,7 @@ public class CountryServiceImp implements CountryService {
         int country = countryRepository.countById(id);
         if (country != 0) {
             countryRepository.deleteById(id);
-            logger.info("Country deleted");
+            logger.info("Country ");
 
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
         } else {

@@ -1,5 +1,6 @@
 package com.example.adminpanel.controller;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.service.HobbyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class HobbyController {
     @GetMapping("list")
     public ResponseModel list() {
         return hobbyService.hobbyList();
+    }
+
+    @PutMapping("update/status")
+    public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
+        return hobbyService.updateStatus(model);
     }
 }

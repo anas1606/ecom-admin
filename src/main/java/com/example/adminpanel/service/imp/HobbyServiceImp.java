@@ -1,5 +1,6 @@
 package com.example.adminpanel.service.imp;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.repository.HobbyRepository;
 import com.example.adminpanel.service.HobbyService;
@@ -59,6 +60,20 @@ public class HobbyServiceImp implements HobbyService {
         } catch (Exception e) {
             logger.error("Exception Will getting Hobby List {}", e.getMessage());
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseModel updateStatus(ActiveInactiveModel model) {
+        Hobby hobby = hobbyRepository.findById(model.getId()).orElse(null);
+        if (hobby != null) {
+            hobby.setStatus(model.getStatus());
+            hobby.setUpdated_by(commanUtil.getCurrentUserEmail());
+            hobbyRepository.save(hobby);
+
+            return commanUtil.create(Message.SUCCESS, hobby, HttpStatus.OK);
+        } else {
+            return commanUtil.create(Message.HOBBY_NOT_EXIST, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

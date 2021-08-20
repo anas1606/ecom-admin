@@ -19,6 +19,7 @@ public class OrderDetailDTO {
     private String country;
     private String state;
     private int pincode;
+    private String createdAt;
 
     public OrderDetailDTO(Order_Detail orderDetail, Customer_Address customerAddress) {
         this.id = orderDetail.getId();
@@ -34,5 +35,6 @@ public class OrderDetailDTO {
         this.country = customerAddress.getCountry().getName();
         this.state = customerAddress.getState().getName();
         this.pincode = customerAddress.getPincode();
+        this.createdAt = orderDetail.getCreated_at().toInstant().toString();
     }
 }

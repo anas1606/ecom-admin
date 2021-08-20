@@ -13,4 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
 
     @Query("SELECT c.name FROM Category c WHERE c.status = 1")
     List<String> findAllByStatus ();
+
+    @Query("SELECT c.name FROM Category c WHERE c.status = 1")
+    List<String> findALL ();
 }

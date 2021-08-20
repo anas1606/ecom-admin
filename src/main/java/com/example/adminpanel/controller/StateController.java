@@ -23,7 +23,7 @@ public class StateController {
         return stateService.statenamelist();
     }
 
-    @GetMapping("list")
+    @GetMapping("list/{}")
     public ResponseModel getCountryList() {
         return stateService.stateList();
     }

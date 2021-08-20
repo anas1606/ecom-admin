@@ -1,5 +1,6 @@
 package com.example.adminpanel.controller;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class CategoryController {
     @GetMapping("name/list")
     public ResponseModel getNameList() {
         return categoryService.listCategoryName();
+    }
+
+    @PutMapping("update/status")
+    public ResponseModel updateCategory(@RequestBody ActiveInactiveModel model) {
+        return categoryService.updateStatus(model);
     }
 }

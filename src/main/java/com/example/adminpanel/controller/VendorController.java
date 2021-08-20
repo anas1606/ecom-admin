@@ -25,7 +25,7 @@ public class VendorController {
         return vendorService.updateStatus(model);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("de0lete/{id}")
     public ResponseModel delete(@PathVariable("id") String id) {
         return vendorService.delete(id);
     }
