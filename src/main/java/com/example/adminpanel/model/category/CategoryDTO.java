@@ -1,4 +1,4 @@
-package com.example.adminpanel.model;
+package com.example.adminpanel.model.category;
 
 import com.example.commanentity.Category;
 import lombok.Data;

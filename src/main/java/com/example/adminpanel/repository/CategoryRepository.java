@@ -1,6 +1,6 @@
 package com.example.adminpanel.repository;
 
-import com.example.adminpanel.model.CategoryDTO;
+import com.example.adminpanel.model.category.CategoryDTO;
 import com.example.commanentity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
     @Query("SELECT c.name FROM Category c WHERE c.status = 1")
     List<String> findAllByStatus ();
 
-    @Query("SELECT new com.example.adminpanel.model.CategoryDTO(c) FROM Category c")
+    @Query("SELECT new com.example.adminpanel.model.category.CategoryDTO(c) FROM Category c")
     List<CategoryDTO> findALL ();
 }
