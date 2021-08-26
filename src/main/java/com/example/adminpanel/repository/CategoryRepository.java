@@ -13,7 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
     int countByName(String name);
 
     @Query("SELECT c.name FROM Category c WHERE c.status = 1")
-    List<String> findAllByStatus ();
+    List<String> findAllName ();
 
     @Query("SELECT new com.example.adminpanel.model.category.CategoryDTO(c) FROM Category c")
     List<CategoryDTO> findALL ();

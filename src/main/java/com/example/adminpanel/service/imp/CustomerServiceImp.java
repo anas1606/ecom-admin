@@ -6,8 +6,10 @@ import com.example.adminpanel.model.PageDetailModel;
 import com.example.adminpanel.model.ResponseModel;
 import com.example.adminpanel.model.customer.CustomerDTO;
 import com.example.adminpanel.model.customer.CustomerDetailDTO;
+import com.example.adminpanel.repository.CustomerAddressRespository;
 import com.example.adminpanel.repository.CustomerHobbyRepository;
 import com.example.adminpanel.repository.CustomerRepository;
+import com.example.adminpanel.repository.OrderDetailRepository;
 import com.example.adminpanel.service.CustomerService;
 import com.example.adminpanel.util.CommanUtil;
 import com.example.adminpanel.util.Message;
@@ -33,6 +35,12 @@ public class CustomerServiceImp implements CustomerService {
 
     @Autowired
     private CustomerHobbyRepository customerHobbyRepository;
+
+    @Autowired
+    private CustomerAddressRespository customerAddressRespository;
+
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
 
     @Override
     public PageResponseModel coustomerlist(PageDetailModel model) {
@@ -71,7 +79,16 @@ public class CustomerServiceImp implements CustomerService {
     public ResponseModel delete(String id) {
         int customer = customerRepository.countById(id);
         if (customer != 0) {
+
+//            Delete Customer orders
+            orderDetailRepository.deleteByCustomer_Id(id);
+//            Delete Customer Address
+            customerAddressRespository.deleteByCustomer_Id(id);
+//            Delete Customer Hobbys
+            customerHobbyRepository.deleteByCustomer_Id(id);
+//            finally delete the customer
             customerRepository.deleteById(id);
+
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
         } else {
             return commanUtil.create(Message.CUSTOMER_NOT_XIST, null, HttpStatus.BAD_REQUEST);

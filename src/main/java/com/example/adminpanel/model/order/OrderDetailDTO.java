@@ -1,7 +1,7 @@
 package com.example.adminpanel.model.order;
 
-import com.example.commanentity.Customer_Address;
-import com.example.commanentity.Order_Detail;
+import com.example.commanentity.CustomerAddress;
+import com.example.commanentity.OrderDetail;
 import lombok.Data;
 
 @Data
@@ -18,10 +18,10 @@ public class OrderDetailDTO {
     private String address2;
     private String country;
     private String state;
-    private int pincode;
+    private String pincode;
     private String createdAt;
 
-    public OrderDetailDTO(Order_Detail orderDetail, Customer_Address customerAddress) {
+    public OrderDetailDTO(OrderDetail orderDetail, CustomerAddress customerAddress) {
         this.id = orderDetail.getId();
         this.firstName = orderDetail.getCustomer().getFirst_name();
         this.lastName = orderDetail.getCustomer().getLast_name();

@@ -2,10 +2,13 @@ package com.example.adminpanel.service.imp;
 
 import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.ResponseModel;
+import com.example.adminpanel.model.state.NewStateModel;
+import com.example.adminpanel.repository.CountryRepository;
 import com.example.adminpanel.repository.StateRepository;
 import com.example.adminpanel.service.StateService;
 import com.example.adminpanel.util.CommanUtil;
 import com.example.adminpanel.util.Message;
+import com.example.commanentity.Country;
 import com.example.commanentity.State;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +25,16 @@ public class StateServiceImp implements StateService {
     private CommanUtil commanUtil;
     @Autowired
     private StateRepository stateRepository;
+    @Autowired
+    private CountryRepository countryRepository;
 
     @Override
-    public ResponseModel addState(String name) {
-        int exist = stateRepository.countByName(name.toUpperCase());
-        if (exist == 0) {
+    public ResponseModel addState(NewStateModel model) {
+        int exist = stateRepository.countByNameAndCountry_Id(model.getName().toUpperCase(), model.getCountryId());
+        Country country = countryRepository.findById(model.getCountryId()).orElse(null);
+        if (exist == 0 && country != null) {
             State s = new State();
-            s.setName(name.toUpperCase());
+            s.setName(model.getName().toUpperCase());
             stateRepository.save(s);
 
             return commanUtil.create(Message.STATE_ADDED, s, HttpStatus.OK);
@@ -44,7 +50,7 @@ public class StateServiceImp implements StateService {
                     , stateRepository.findByALL()
                     , HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("Exception Will geting Country List {}", e.getMessage());
+            logger.error("Exception Will geting State List {}", e.getMessage());
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

@@ -1,6 +1,6 @@
 package com.example.adminpanel.model.order;
 
-import com.example.commanentity.Order_Detail;
+import com.example.commanentity.OrderDetail;
 import lombok.Data;
 
 @Data
@@ -10,9 +10,9 @@ public class OrderDTO {
     private String productName;
     private String price;
     private int status;
-    private int pincode;
+    private String pincode;
 
-    public OrderDTO(Order_Detail orderDetail,int pincode) {
+    public OrderDTO(OrderDetail orderDetail,String pincode) {
         this.id = orderDetail.getId();
         this.price = orderDetail.getProduct().getPrice().toString();
         this.productName = orderDetail.getProduct().getName();
