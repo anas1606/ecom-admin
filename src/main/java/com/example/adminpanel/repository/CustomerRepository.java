@@ -13,17 +13,20 @@ import org.springframework.stereotype.Repository;
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
     @Query("SELECT new com.example.adminpanel.model.customer.CustomerDTO(c,ca.country.name,ca.state.name) FROM Customer c " +
-            "LEFT JOIN Customer_Address ca on c.id = ca.customer.id")
-    Page<CustomerDTO> findALL(Pageable page);
+            "LEFT JOIN CustomerAddress ca on c.id = ca.customer.id" +
+            " WHERE lower(c.first_name) like lower(:search) OR lower(c.last_name) like lower(:search)" +
+            " OR lower(ca.country.name) like lower(:search) OR lower(ca.state.name) like lower(:search)")
+    Page<CustomerDTO> findALL(String search, Pageable page);
 
     @Query("SELECT new com.example.adminpanel.model.customer.CustomerDTO(c,ca.country.name,ca.state.name) FROM Customer c " +
-            "LEFT JOIN Customer_Address ca on c.id = ca.customer.id " +
-            "WHERE lower(c.first_name) like lower(:search) OR lower(c.last_name) like lower(:search) " +
-            "OR lower(ca.country.name) like lower(:search) OR lower(ca.state.name) like lower(:search) ")
-    Page<CustomerDTO> findAllBySearch(String search, Pageable page);
+            "LEFT JOIN CustomerAddress ca on c.id = ca.customer.id " +
+            "WHERE (lower(c.first_name) like lower(:search) OR lower(c.last_name) like lower(:search) " +
+            "OR lower(ca.country.name) like lower(:search) OR lower(ca.state.name) like lower(:search)) " +
+            " AND c.status = :status")
+    Page<CustomerDTO> findAllBySearch(String search, int status, Pageable page);
 
     @Query("SELECT new com.example.adminpanel.model.customer.CustomerDetailDTO(c,ca)" +
-            " FROM Customer c LEFT JOIN Customer_Address ca ON c.id = ca.customer.id" +
+            " FROM Customer c LEFT JOIN CustomerAddress ca ON c.id = ca.customer.id" +
             " WHERE c.id = :id")
     CustomerDetailDTO findAllByid(String id);
 

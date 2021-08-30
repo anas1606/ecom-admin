@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class StateServiceImp implements StateService {
 
@@ -35,6 +37,7 @@ public class StateServiceImp implements StateService {
         if (exist == 0 && country != null) {
             State s = new State();
             s.setName(model.getName().toUpperCase());
+            s.setCountry(country);
             stateRepository.save(s);
 
             return commanUtil.create(Message.STATE_ADDED, s, HttpStatus.OK);
@@ -51,7 +54,7 @@ public class StateServiceImp implements StateService {
                     , HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Exception Will geting State List {}", e.getMessage());
-            return commanUtil.create(Message.SUCCESS, null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -60,7 +63,8 @@ public class StateServiceImp implements StateService {
         State state = stateRepository.findById(model.getId()).orElse(null);
         if (state != null) {
             state.setStatus(model.getStatus());
-            state.setName(model.getName().toUpperCase());
+            String name = model.getName();
+            state.setName(name.toUpperCase());
             state.setUpdated_by(commanUtil.getCurrentUserEmail());
             stateRepository.save(state);
             logger.info("state Status Updated");
@@ -71,6 +75,7 @@ public class StateServiceImp implements StateService {
         }
     }
 
+    @Transactional
     @Override
     public ResponseModel delete(String id) {
         int state = stateRepository.countById(id);

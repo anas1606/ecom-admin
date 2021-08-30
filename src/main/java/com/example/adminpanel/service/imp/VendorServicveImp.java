@@ -36,11 +36,11 @@ public class VendorServicveImp implements VendorService {
             model = commanUtil.fillValueToPageModel(model);
             Pageable page = commanUtil.getPageDetail(model);
             Page<VendorDTO> dto;
-
-            if (commanUtil.checkNull(model.getSearchKeyword()))
-                dto = vendorRepository.findALL(page);
+            String search = "%" + model.getSearchKeyword() + "%";
+            if (model.getStatus() == -1)
+                dto = vendorRepository.findALL(search,page);
             else
-                dto = vendorRepository.findAllBySearch("%" + model.getSearchKeyword() + "%", page);
+                dto = vendorRepository.findAllBySearch(search,model.getStatus(), page);
 
             return commanUtil.create(Message.SUCCESS, dto.getContent(), commanUtil.pagersultModel(dto), HttpStatus.OK);
 

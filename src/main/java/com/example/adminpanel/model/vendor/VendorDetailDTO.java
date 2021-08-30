@@ -1,6 +1,6 @@
 package com.example.adminpanel.model.vendor;
 
-import com.example.commanentity.Company_Address;
+import com.example.commanentity.CompanyAddress;
 import com.example.commanentity.Vendor;
 import lombok.Data;
 
@@ -15,10 +15,10 @@ public class VendorDetailDTO {
     private String address2;
     private String country;
     private String state;
-    private int pincode;
+    private String pincode;
     private int status;
 
-    public VendorDetailDTO(Vendor vendor, Company_Address companyAddress) {
+    public VendorDetailDTO(Vendor vendor, CompanyAddress companyAddress) {
         this.id = vendor.getId();
         this.emailid = vendor.getEmailid();
         this.phoneno = vendor.getPhoneno();

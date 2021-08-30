@@ -22,6 +22,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @Service
 public class CustomerServiceImp implements CustomerService {
 
@@ -48,11 +51,11 @@ public class CustomerServiceImp implements CustomerService {
             model = commanUtil.fillValueToPageModel(model);
             Pageable page = commanUtil.getPageDetail(model);
             Page<CustomerDTO> dto;
-
-            if (commanUtil.checkNull(model.getSearchKeyword()))
-                dto = customerRepository.findALL(page);
+            String search = "%" + model.getSearchKeyword() + "%";
+            if (model.getStatus() == -1)
+                dto = customerRepository.findALL(search,page);
             else
-                dto = customerRepository.findAllBySearch("%" + model.getSearchKeyword() + "%", page);
+                dto = customerRepository.findAllBySearch(search,model.getStatus(), page);
 
             return commanUtil.create(Message.SUCCESS, dto.getContent(), commanUtil.pagersultModel(dto), HttpStatus.OK);
 
@@ -75,6 +78,7 @@ public class CustomerServiceImp implements CustomerService {
         }
     }
 
+    @Transactional
     @Override
     public ResponseModel delete(String id) {
         int customer = customerRepository.countById(id);
@@ -99,8 +103,8 @@ public class CustomerServiceImp implements CustomerService {
     public ResponseModel viewCustomer(String id) {
         try {
             CustomerDetailDTO customerDetailDTO = customerRepository.findAllByid(id);
-            String hobbys = customerHobbyRepository.findByid(id);
-            customerDetailDTO.setHobby(commanUtil.trimLastComma(hobbys));
+            List<String> hobbys = customerHobbyRepository.findByid(id);
+            customerDetailDTO.setHobby(hobbys);
 
             return commanUtil.create(Message.SUCCESS, customerDetailDTO, HttpStatus.OK);
         } catch (Exception e) {

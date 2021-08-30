@@ -10,12 +10,12 @@ import java.util.List;
 
 @Repository
 public interface StateRepository extends JpaRepository<State, String> {
-    int countByNameAndCountry_Id(String name,String country);
+    int countByNameAndCountry_Id(String name, String country);
 
     @Query("SELECT s.name FROM State s WHERE s.country.name = :country AND s.status = 1")
     List<String> findAllByCountry(String country);
 
-    @Query("SELECT new com.example.adminpanel.model.state.StateDTO(s) FROM State s")
+    @Query("SELECT new com.example.adminpanel.model.state.StateDTO(s.id,s.name,s.status,s.country.name) FROM State s ")
     List<StateDTO> findByALL();
 
     int countById(String id);

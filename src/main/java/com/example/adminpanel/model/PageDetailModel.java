@@ -9,4 +9,5 @@ public class PageDetailModel {
     private String sortorder;
     private String sortFileld;
     private String searchKeyword;
+    private int status;
 }

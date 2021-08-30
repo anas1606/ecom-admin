@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class CommanUtil {
 
@@ -85,6 +87,9 @@ public class CommanUtil {
     }
 
     public String trimLastComma(String str) {
-        return str.substring(0, str.length() - 1);
+        if (str != null)
+            return str.substring(0, str.length() - 1);
+        else
+            return null;
     }
 }

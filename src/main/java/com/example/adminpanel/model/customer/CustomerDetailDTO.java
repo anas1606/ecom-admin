@@ -1,8 +1,10 @@
 package com.example.adminpanel.model.customer;
 
 import com.example.commanentity.Customer;
-import com.example.commanentity.Customer_Address;
+import com.example.commanentity.CustomerAddress;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class CustomerDetailDTO {
@@ -15,11 +17,11 @@ public class CustomerDetailDTO {
     private String address2;
     private String country;
     private String state;
-    private int pincode;
+    private String pincode;
     private int status;
-    private String hobby;
+    private List<String> hobby;
 
-    public CustomerDetailDTO(Customer customer, Customer_Address customerAddress) {
+    public CustomerDetailDTO(Customer customer, CustomerAddress customerAddress) {
         this.id = customer.getId();
         this.emailid = customer.getEmailid();
         this.gender = customer.getGender();
