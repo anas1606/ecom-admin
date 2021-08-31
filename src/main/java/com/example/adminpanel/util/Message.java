@@ -20,4 +20,5 @@ public class Message {
     public static final String VENDOR_NOT_XIST = "Customer not exist";
     public static final String ORDER_NOT_EXIST = "Order not exist";
     public static final String HOBBY_NOT_EXIST = "Hobby not exist";
+    public static final String PRODUCT_NOT_EXIST = "Product not exist";
 }

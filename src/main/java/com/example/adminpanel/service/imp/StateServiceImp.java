@@ -74,18 +74,4 @@ public class StateServiceImp implements StateService {
             return commanUtil.create(Message.STATE_NOT_EXIST, null, HttpStatus.BAD_REQUEST);
         }
     }
-
-    @Transactional
-    @Override
-    public ResponseModel delete(String id) {
-        int state = stateRepository.countById(id);
-        if (state != 0) {
-            stateRepository.deleteById(id);
-            logger.info("Country deleted");
-
-            return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
-        } else {
-            return commanUtil.create(Message.COUNTRY_NOT_XIST, null, HttpStatus.BAD_REQUEST);
-        }
-    }
 }

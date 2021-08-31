@@ -14,13 +14,14 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, String
 
     @Query("SELECT new com.example.adminpanel.model.order.OrderDTO(o,ca.pincode) " +
             "FROM OrderDetail o " +
-            "INNER JOIN CustomerAddress ca ON o.customer.id = ca.customer.id ")
-    Page<OrderDTO> findALL(Pageable page);
+            "INNER JOIN CustomerAddress ca ON o.customer.id = ca.customer.id " +
+            "WHERE lower(o.id) like lower(:search) OR lower(ca.pincode) like lower(:search)")
+    Page<OrderDTO> findALL(String search, Pageable page);
 
     @Query("SELECT new com.example.adminpanel.model.order.OrderDTO(o,ca.pincode) FROM OrderDetail o " +
             "INNER JOIN CustomerAddress ca on o.customer.id = ca.customer.id " +
-            "WHERE lower(o.id) like lower(:search) OR lower(ca.pincode) like lower(:search) ")
-    Page<OrderDTO> findAllBySearch(String search, Pageable page);
+            "WHERE (lower(o.id) like lower(:search) OR lower(ca.pincode) like lower(:search)) AND o.status = :status")
+    Page<OrderDTO> findAllBySearch(String search, int status, Pageable page);
 
     @Query("SELECT new com.example.adminpanel.model.order.OrderDetailDTO(o,ca)" +
             " FROM OrderDetail o LEFT JOIN CustomerAddress ca ON o.customer.id = ca.customer.id" +

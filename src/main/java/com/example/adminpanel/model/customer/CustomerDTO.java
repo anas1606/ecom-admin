@@ -13,6 +13,7 @@ public class CustomerDTO {
     private String country;
     private String state;
     private int status;
+    private String createdAt;
 
     public CustomerDTO(Customer customer, String country, String state) {
         this.id = customer.getId();
@@ -23,5 +24,6 @@ public class CustomerDTO {
         this.country = country;
         this.state = state;
         this.status = customer.getStatus();
+        this.createdAt = customer.getCreated_at().toInstant().toString();
     }
 }

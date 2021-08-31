@@ -11,6 +11,7 @@ public class VendorDTO {
     private String country;
     private String state;
     private int status;
+    private String createdAt;
 
     public VendorDTO(Vendor vendor, String country, String state) {
         this.id = vendor.getId();
@@ -19,5 +20,6 @@ public class VendorDTO {
         this.status = vendor.getStatus();
         this.country = country;
         this.state = state;
+        this.createdAt = vendor.getCreated_at().toInstant().toString();
     }
 }

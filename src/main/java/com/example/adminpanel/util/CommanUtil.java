@@ -60,7 +60,7 @@ public class CommanUtil {
             pageDetailModel.setLimit(20);
         }
         if (checkNull(pageDetailModel.getSortorder())) {
-            pageDetailModel.setSortorder("ASC");
+            pageDetailModel.setSortorder("DESC");
         }
         if (checkNull(pageDetailModel.getSortFileld())) {
             pageDetailModel.setSortFileld("created_at");

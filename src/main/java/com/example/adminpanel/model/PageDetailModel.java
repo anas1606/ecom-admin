@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PageDetailModel {
+    private String id;
     private int page;
     private int limit;
     private String sortorder;

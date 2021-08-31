@@ -29,8 +29,4 @@ public class StateController {
         return stateService.update(model);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseModel delete(@PathVariable("id") String id) {
-        return stateService.delete(id);
-    }
 }

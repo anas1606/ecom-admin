@@ -31,7 +31,7 @@ public class HobbyServiceImp implements HobbyService {
         int exist = hobbyRepository.countByName(name);
         if (exist == 0) {
             Hobby hobby = new Hobby();
-            hobby.setName(name);
+            hobby.setName(name.toUpperCase());
             hobbyRepository.save(hobby);
             return commanUtil.create(Message.SUCCESS, hobby, HttpStatus.OK);
         } else {

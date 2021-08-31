@@ -25,9 +25,14 @@ public class VendorController {
         return vendorService.updateStatus(model);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseModel delete(@PathVariable("id") String id) {
-        return vendorService.delete(id);
+    @PutMapping("/product")
+    public ResponseModel updateProductStatus(@RequestBody ActiveInactiveModel model) {
+        return vendorService.updateProduct(model);
+    }
+
+    @PostMapping("/product/list")
+    public PageResponseModel getProducts (@RequestBody PageDetailModel model){
+        return vendorService.productList(model);
     }
 
     @GetMapping("/{id}")

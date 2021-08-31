@@ -10,5 +10,4 @@ public interface CountryService {
 
     ResponseModel update(ActiveInactiveModel model);
 
-    ResponseModel delete(String id);
 }

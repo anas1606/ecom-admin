@@ -11,6 +11,8 @@ public class OrderDTO {
     private String price;
     private int status;
     private String pincode;
+    private String createdAt;
+    private String vendor;
 
     public OrderDTO(OrderDetail orderDetail,String pincode) {
         this.id = orderDetail.getId();
@@ -19,5 +21,7 @@ public class OrderDTO {
         this.name = orderDetail.getCustomer().getFirst_name() + " " + orderDetail.getCustomer().getLast_name();
         this.status = orderDetail.getStatus();
         this.pincode = pincode;
+        this.createdAt = orderDetail.getCreated_at().toInstant().toString();
+        this.vendor = orderDetail.getProduct().getVendor().getCompany_name();
     }
 }

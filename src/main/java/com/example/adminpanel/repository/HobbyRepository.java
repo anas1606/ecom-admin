@@ -15,6 +15,6 @@ public interface HobbyRepository extends JpaRepository<Hobby, String> {
     @Query("SELECT h.name FROM Hobby h WHERE h.status = 1")
     List<String> findAllName();
 
-    @Query("SELECT new com.example.adminpanel.model.hobby.HobbyDTO(h) FROM Hobby h")
+    @Query("SELECT new com.example.adminpanel.model.hobby.HobbyDTO(h) FROM Hobby h ORDER BY h.name ASC")
     List<HobbyDTO> findByALL();
 }

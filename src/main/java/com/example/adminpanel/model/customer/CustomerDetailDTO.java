@@ -19,6 +19,7 @@ public class CustomerDetailDTO {
     private String state;
     private String pincode;
     private int status;
+    private boolean emailVerified;
     private List<String> hobby;
 
     public CustomerDetailDTO(Customer customer, CustomerAddress customerAddress) {
@@ -33,5 +34,6 @@ public class CustomerDetailDTO {
         this.pincode = customerAddress.getPincode();
         this.country = customerAddress.getCountry().getName();
         this.state = customerAddress.getState().getName();
+        this.emailVerified = customer.isEmailverified();
     }
 }

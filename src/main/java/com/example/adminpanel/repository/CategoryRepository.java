@@ -15,6 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, String> {
     @Query("SELECT c.name FROM Category c WHERE c.status = 1")
     List<String> findAllName ();
 
-    @Query("SELECT new com.example.adminpanel.model.category.CategoryDTO(c) FROM Category c")
+    @Query("SELECT new com.example.adminpanel.model.category.CategoryDTO(c) FROM Category c ORDER BY c.name ASC")
     List<CategoryDTO> findALL ();
 }

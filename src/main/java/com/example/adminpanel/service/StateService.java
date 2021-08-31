@@ -11,5 +11,4 @@ public interface StateService {
 
     ResponseModel update(ActiveInactiveModel model);
 
-    ResponseModel delete(String id);
 }

@@ -29,8 +29,4 @@ public class CountryController {
         return countryService.update(model);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseModel delete(@PathVariable("id") String id) {
-        return countryService.delete(id);
-    }
 }

@@ -10,7 +10,9 @@ public interface VendorService {
 
     ResponseModel updateStatus(ActiveInactiveModel model);
 
-    ResponseModel delete(String id);
+    PageResponseModel productList (PageDetailModel model);
+
+    ResponseModel updateProduct (ActiveInactiveModel model);
 
     ResponseModel viewVendor(String id);
 }

@@ -1,5 +1,6 @@
 package com.example.adminpanel.controller;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.PageDetailModel;
 import com.example.adminpanel.model.PageResponseModel;
 import com.example.adminpanel.model.ResponseModel;
@@ -22,6 +23,11 @@ public class OrderController {
     @GetMapping("/{id}")
     public ResponseModel view(@PathVariable("id") String id) {
         return orderService.view(id);
+    }
+
+    @PutMapping("")
+    public ResponseModel updateStatus(@RequestBody ActiveInactiveModel model) {
+        return orderService.updateStatus(model);
     }
 
     @DeleteMapping("/{id}")

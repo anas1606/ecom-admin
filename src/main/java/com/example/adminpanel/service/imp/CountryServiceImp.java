@@ -64,17 +64,4 @@ public class CountryServiceImp implements CountryService {
             return commanUtil.create(Message.COUNTRY_NOT_XIST, null, HttpStatus.BAD_REQUEST);
         }
     }
-
-    @Override
-    public ResponseModel delete(String id) {
-        int country = countryRepository.countById(id);
-        if (country != 0) {
-            countryRepository.deleteById(id);
-            logger.info("Country Deleted");
-
-            return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
-        } else {
-            return commanUtil.create(Message.COUNTRY_NOT_XIST, null, HttpStatus.BAD_REQUEST);
-        }
-    }
 }

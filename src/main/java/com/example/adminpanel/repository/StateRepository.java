@@ -15,8 +15,6 @@ public interface StateRepository extends JpaRepository<State, String> {
     @Query("SELECT s.name FROM State s WHERE s.country.name = :country AND s.status = 1")
     List<String> findAllByCountry(String country);
 
-    @Query("SELECT new com.example.adminpanel.model.state.StateDTO(s.id,s.name,s.status,s.country.name) FROM State s ")
+    @Query("SELECT new com.example.adminpanel.model.state.StateDTO(s.id,s.name,s.status,s.country.name,s.updated_by) FROM State s ORDER BY s.country.name ASC")
     List<StateDTO> findByALL();
-
-    int countById(String id);
 }

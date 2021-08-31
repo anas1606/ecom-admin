@@ -37,7 +37,7 @@ public class AdminController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseModel login(@RequestBody LoginModel loginModel) {
         ResponseModel responseModel;
 

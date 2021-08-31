@@ -1,5 +1,6 @@
 package com.example.adminpanel.service.imp;
 
+import com.example.adminpanel.model.ActiveInactiveModel;
 import com.example.adminpanel.model.PageDetailModel;
 import com.example.adminpanel.model.PageResponseModel;
 import com.example.adminpanel.model.ResponseModel;
@@ -11,6 +12,8 @@ import com.example.adminpanel.repository.OrderDetailRepository;
 import com.example.adminpanel.service.OrderService;
 import com.example.adminpanel.util.CommanUtil;
 import com.example.adminpanel.util.Message;
+import com.example.commanentity.OrderDetail;
+import com.example.commanentity.Vendor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +38,11 @@ public class OrderServiceImp implements OrderService {
             model = commanUtil.fillValueToPageModel(model);
             Pageable page = commanUtil.getPageDetail(model);
             Page<OrderDTO> dto;
-
-            if (commanUtil.checkNull(model.getSearchKeyword()))
-                dto = orderDetailRepository.findALL(page);
+            String search = "%" + model.getSearchKeyword() + "%";
+            if (model.getStatus() == -1)
+                dto = orderDetailRepository.findALL(search,page);
             else
-                dto = orderDetailRepository.findAllBySearch("%" + model.getSearchKeyword() + "%", page);
+                dto = orderDetailRepository.findAllBySearch(search,model.getStatus(), page);
 
             return commanUtil.create(Message.SUCCESS, dto.getContent(), commanUtil.pagersultModel(dto), HttpStatus.OK);
 
@@ -69,6 +72,19 @@ public class OrderServiceImp implements OrderService {
             return commanUtil.create(Message.SUCCESS, null, HttpStatus.OK);
         } else {
             return commanUtil.create(Message.ORDER_NOT_EXIST, null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public ResponseModel updateStatus(ActiveInactiveModel model) {
+        OrderDetail order = orderDetailRepository.findById(model.getId()).orElse(null);
+        if (order != null) {
+            order.setStatus(model.getStatus());
+            order.setUpdated_by(commanUtil.getCurrentUserEmail());
+            orderDetailRepository.save(order);
+            return commanUtil.create(Message.SUCCESS, order, HttpStatus.OK);
+        } else {
+            return commanUtil.create(Message.ORDER_NOT_EXIST, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
