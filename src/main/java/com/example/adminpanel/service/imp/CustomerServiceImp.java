@@ -108,6 +108,7 @@ public class CustomerServiceImp implements CustomerService {
 
             return commanUtil.create(Message.SUCCESS, customerDetailDTO, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error("Exception Will Customer View Profile");
             return commanUtil.create(Message.SOMTHING_WRONG, null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

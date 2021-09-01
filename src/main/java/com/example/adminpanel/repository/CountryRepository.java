@@ -12,7 +12,7 @@ import java.util.List;
 public interface CountryRepository extends JpaRepository<Country, String> {
     int countByName(String name);
 
-    @Query("SELECT c.name FROM Country c WHERE c.status = 1")
+    @Query("SELECT c.name FROM Country c WHERE c.status = 1 ORDER BY c.name ASC")
     List<String> findAllByStatus();
 
     @Query("SELECT new com.example.adminpanel.model.country.CountryDTO(c) FROM Country c ORDER BY c.name ASC")

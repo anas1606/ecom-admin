@@ -12,7 +12,7 @@ import java.util.List;
 public interface HobbyRepository extends JpaRepository<Hobby, String> {
     int countByName(String name);
 
-    @Query("SELECT h.name FROM Hobby h WHERE h.status = 1")
+    @Query("SELECT h.name FROM Hobby h WHERE h.status = 1 ORDER BY h.name ASC")
     List<String> findAllName();
 
     @Query("SELECT new com.example.adminpanel.model.hobby.HobbyDTO(h) FROM Hobby h ORDER BY h.name ASC")

@@ -12,7 +12,7 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category, String> {
     int countByName(String name);
 
-    @Query("SELECT c.name FROM Category c WHERE c.status = 1")
+    @Query("SELECT c.name FROM Category c WHERE c.status = 1 ORDER BY c.name ASC")
     List<String> findAllName ();
 
     @Query("SELECT new com.example.adminpanel.model.category.CategoryDTO(c) FROM Category c ORDER BY c.name ASC")
