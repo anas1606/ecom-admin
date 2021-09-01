@@ -17,9 +17,6 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
   jpa:
     show-sql: false
-    properties:
-      hibernate:
-        metadata_builder_contributor: com.example.adminpanel.service.SqlFunctionsMetadataBuilderContributor
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
