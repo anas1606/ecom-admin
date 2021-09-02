@@ -17,6 +17,7 @@ public class VendorDetailDTO {
     private String state;
     private String pincode;
     private int status;
+    private String profile_url;
     private boolean emailVerified;
 
     public VendorDetailDTO(Vendor vendor, CompanyAddress companyAddress) {
@@ -32,5 +33,6 @@ public class VendorDetailDTO {
         this.country = companyAddress.getCountry().getName();
         this.state = companyAddress.getState().getName();
         this.emailVerified = vendor.isEmailverified();
+        this.profile_url = vendor.getProfile_url();
     }
 }
